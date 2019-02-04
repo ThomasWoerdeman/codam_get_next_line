@@ -6,13 +6,13 @@
 /*   By: twoerdem <twoerdem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/24 07:50:09 by twoerdem       #+#    #+#                */
-/*   Updated: 2019/02/02 18:16:40 by twoerdem      ########   odam.nl         */
+/*   Updated: 2019/02/04 16:56:54 by twoerdem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 80
+# define BUFF_SIZE 1337
 # include <fcntl.h>
 # include <unistd.h>
 # include "./libft/libft.h"
