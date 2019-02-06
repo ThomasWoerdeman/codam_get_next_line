@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_memalloc.c                                      :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: twoerdem <marvin@codam.nl>                   +#+                     */
+/*   By: twoerdem <twoerdem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/14 10:29:03 by twoerdem      #+#    #+#                 */
-/*   Updated: 2019/01/14 10:29:04 by twoerdem      ########   odam.nl         */
+/*   Created: 2019/01/14 10:29:03 by twoerdem       #+#    #+#                */
+/*   Updated: 2019/02/05 16:24:29 by twoerdem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

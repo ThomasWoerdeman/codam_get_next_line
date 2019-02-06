@@ -6,7 +6,7 @@
 /*   By: twoerdem <twoerdem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/24 07:49:53 by twoerdem       #+#    #+#                */
-/*   Updated: 2019/02/04 19:56:39 by twoerdem      ########   odam.nl         */
+/*   Updated: 2019/02/06 17:24:07 by twoerdem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,66 +29,64 @@ static t_list	*get_correct_fd(int fd, t_list **list)
 	return (tmp);
 }
 
-static void		read_line(t_list *list, char **line)
+static int		read_line(t_list *current, char **line)
 {
 	int			len;
 
-	len = ft_strlchr(list->content, '\n');
+	if (ft_strncmp(current->content, "\n", 1) == 0)
+	{
+		*line = ft_strdup("\0");
+		current->content = ft_memmove(current->content, current->content + 1, \
+		ft_strlen(current->content));
+		return (1);
+	}
+	len = ft_strlchr(current->content, '\n');
 	if (len == -1)
-		len = ft_strlen(list->content);
-	*line = ft_strsub(list->content, 0, len);
-	ft_memmove(list->content, list->content + len + 1,
-		ft_strlen(list->content));
+	{
+		*line = ft_strdup(current->content);
+		free(current->content);
+		current->content = ft_strdup("\0");
+		return (1);
+	}
+	*line = ft_strsub(current->content, 0, len);
+	current->content = ft_memmove(current->content, \
+		current->content + len + 1, ft_strlen(current->content));
+	return (1);
+}
+
+static char		*join_string(char *content, char *buf)
+{
+	char *ret;
+
+	ret = ft_strjoin(content, buf);
+	free(content);
+	return (ret);
 }
 
 int				get_next_line(int fd, char **line)
 {
 	char			buf[BUFF_SIZE + 1];
 	static t_list	*list;
-	t_list			*tmp;
+	t_list			*current;
 	int				ret;
+	int				c;
 
 	ret = read(fd, buf, BUFF_SIZE);
 	if (ret < 0 || line == NULL)
 		return (-1);
-	tmp = get_correct_fd(fd, &list);
+	current = get_correct_fd(fd, &list);
 	while (ret)
 	{
 		buf[ret] = '\0';
-		tmp->content = ft_strjoin(tmp->content, buf);
+		current->content = join_string(current->content, buf);
 		if (ft_strchr(buf, '\n'))
 			break ;
 		ret = read(fd, buf, BUFF_SIZE);
 	}
-	list = tmp;
-	if (ret == 0 && ft_strlen(list->content) == 0)
-		return (0);
-	read_line(list, line);
-	return (1);
-}
-
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-
-int			main()
-{
-	char *line;
-
-	int ja1 = open("ja1", O_RDONLY);
-	int ja2 = open("ja2", O_RDONLY);
-	int x = 0;
-	char **ja1in = ft_memalloc(4);
-	char **ja2in = malloc(4);
-	while (x < 4)
+	if (ret == 0 && ft_strlen(current->content) == 0)
 	{
-		get_next_line(ja1,ja1in);
-		get_next_line(ja2,ja2in);
-		ft_putstr(*ja1in);
-		ft_putstr("\n");
-		ft_putstr(*ja2in);
-		ft_putstr("\n");
-		x++;
+		return (0);
 	}
+	c = read_line(current, line);
+	return (c);
 }

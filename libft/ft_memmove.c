@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_memmove.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: twoerdem <marvin@codam.nl>                   +#+                     */
+/*   By: twoerdem <twoerdem@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/12 16:58:05 by twoerdem      #+#    #+#                 */
-/*   Updated: 2019/01/12 16:58:06 by twoerdem      ########   odam.nl         */
+/*   Created: 2019/01/12 16:58:05 by twoerdem       #+#    #+#                */
+/*   Updated: 2019/02/05 15:36:01 by twoerdem      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
